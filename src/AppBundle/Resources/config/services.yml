@@ -2,3 +2,5 @@ services:
     antispam:
         class: AppBundle\Antispam\Antispam
         arguments: ['%antispam_length%', '@mailer']
+    string.util:
+        class: AppBundle\Util\StringUtil

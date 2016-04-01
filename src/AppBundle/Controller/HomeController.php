@@ -14,29 +14,13 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-        /*$antispam = $this->get('antispam');
-        dump($antispam->isSpam('sefsefessefsesefsefsesesefsf'));die;*/
-
         $manager = $this->getDoctrine()->getManager();
-
-        /*$article = new Article();
-
-        $article
-            ->setTitle('Titre article')
-            ->setContent('Le contenu de mon premier article')
-            ->setAuthor('Moi')
-            ->setTag('osef')
-        ;
-
-        $manager->persist($article);
-        $manager->flush();*/
-
         $articleRepository = $manager->getRepository('AppBundle:Article\Article');
 
         $articles = $articleRepository->findAll();
 
-        $articles[0]->getCreatedAt();
-
-        return $this->render('AppBundle:Home:index.html.twig');
+        return $this->render('AppBundle:Article:index.html.twig', [
+            'articles' => $articles,
+        ]);
     }
 }

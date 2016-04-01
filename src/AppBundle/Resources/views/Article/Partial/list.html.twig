@@ -1,7 +1,10 @@
 <ul>
-    {% for tutorial in tutorials %}
-        <li>id: {{ tutorial.id }} name: {{ tutorial.name }}</li>
+    {% for article in articles %}
+        <li>
+            id: {{ article.id }} name: {{ article.title }}
+            <a href="{{ path('article_author', { 'author': article.author }) }}">{{ article.author }}</a>
+        </li>
     {% else %}
-        <li>Pas de tutoriel trouvé.</li>
+        <li>Pas d'article trouvé.</li>
     {% endfor %}
 </ul>
