@@ -33,11 +33,18 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Projet Sympfony</a>
+                        <a class="navbar-brand" href="{{ path('home') }}">Projet Symfony</a>
                     </div>
                 </div>
                 <div class="col-md-offset-5 col-md-4">
                     <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="col-md-offset-4 col-md-4 text-center">
+                        <a href="{{ path('article_list')}}" class="btn btn-primary"> Liste des articles</a>
+                    </div>
+                    <div class="col-md-offset-4 col-md-4 text-center">
+                        <a href="{{ path('article_new')}}" class="btn btn-primary"> Créer un nouvel
+                            Article</a>
+                    </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 

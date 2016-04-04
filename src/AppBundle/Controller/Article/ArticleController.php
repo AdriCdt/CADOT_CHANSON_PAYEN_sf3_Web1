@@ -145,6 +145,7 @@ class ArticleController extends Controller
         $articles = new Article();
 
         $form = $this -> createFormBuilder( $articles )
+            -> add ('author', TextType::class, array( 'label'=>'Auteur') )
             -> add ('title', TextType::class, array( 'label'=>'Titre') )
             -> add ('content', TextareaType::class, array ('label'=>'Contenu'))
             -> add ('tag', TextType::class, array ('label' => 'Tag de l\'article'))
@@ -161,6 +162,8 @@ class ArticleController extends Controller
 
 
 
+            $author = $articles->getAuthor();
+            $articles->setAuthor($author);
 
             $title = $articles->getTitle();
             $articles->setTitle($title);
