@@ -147,23 +147,54 @@ class ArticleController extends Controller
         $form = $this -> createFormBuilder( $articles )
             -> add ('title', TextType::class, array( 'label'=>'Titre') )
             -> add ('content', TextareaType::class, array ('label'=>'Contenu'))
+            -> add ('tag', TextType::class, array ('label' => 'Tag de l\'article'))
             -> add ('save', SubmitType::class, array ('label' => 'Creer l\'article'))
             -> getForm();
 
-        /* $article->setTitle('Mon premier article');
-        $article->setContent('bal bla bla');
-        $article->setCreatedAt( new \DateTime() );
+        $form->handleRequest($request);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($article);
-        $em->flush(); */
+        if ($form->isValid()) {
 
+            $articles = $form->getData();
+
+
+
+
+
+
+            $title = $articles->getTitle();
+            $articles->setTitle($title);
+
+            $content = $articles->getContent();
+            $articles->setContent($content);
+
+
+            $stringUtil = $this->get('string.util');
+
+            $tag = $stringUtil->slugify($articles->getTag());
+            $articles->setTag($tag);
+
+
+            /*$articles->setTitle();
+            $articles->setContent();
+            $articles->setTag();*/
+            $articles->setCreatedAt( new \DateTime() );
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($articles);
+            $em->flush();
+
+            return $this->redirectToRoute('article_list');
+        }
         return $this->render('AppBundle:Article:create.html.twig', [
-            'form' => $form->createView()
-            ]);
+            'form' => $form->createView()]);
+
+
 
 
     }
+
+
 }
 
 

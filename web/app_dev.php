@@ -2,6 +2,7 @@
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
+date_default_timezone_get('Europe/London');
 
 // If you don't want to setup permissions the proper way, just uncomment the following PHP line
 // read http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup

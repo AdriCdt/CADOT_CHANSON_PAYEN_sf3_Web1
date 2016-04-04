@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
+date_default_timezone_get('Europe/London');
 
 /**
  * @var Composer\Autoload\ClassLoader
