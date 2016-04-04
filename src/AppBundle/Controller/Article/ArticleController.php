@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ArticleController extends Controller
 {
@@ -35,7 +38,15 @@ class ArticleController extends Controller
      */
     public function showAction($id, Request $request)
     {
-        $article = $this->getDoctrine()->getManager();
+        $articles = $this->getDoctrine()->getRepository('AppBundle:Article\Article')->find( $id );
+
+        if ( !$articles ) {
+            throw $this -> createNotFoundException();
+        }
+
+        return $this -> render('AppBundle:Article:show.html.twig', [
+                'articles' => $articles,
+                ]);
     }
 
     /**
@@ -131,17 +142,25 @@ class ArticleController extends Controller
      */
     public function createAction(Request $request)
     {
-        $article = new Article();
+        $articles = new Article();
 
-        $article->setTitle('Mon premier article');
+        $form = $this -> createFormBuilder( $articles )
+            -> add ('title', TextType::class, array( 'label'=>'Titre') )
+            -> add ('content', TextareaType::class, array ('label'=>'Contenu'))
+            -> add ('save', SubmitType::class, array ('label' => 'Creer l\'article'))
+            -> getForm();
+
+        /* $article->setTitle('Mon premier article');
         $article->setContent('bal bla bla');
         $article->setCreatedAt( new \DateTime() );
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($article);
-        $em->flush();
+        $em->flush(); */
 
-        return $this->render('AppBundle:Article:create.html.twig');
+        return $this->render('AppBundle:Article:create.html.twig', [
+            'form' => $form->createView()
+            ]);
 
 
     }
