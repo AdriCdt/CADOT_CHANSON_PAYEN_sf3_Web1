@@ -6,6 +6,9 @@
 <h2> {{ articles.title }}</h2>
 <hr>
 <p>{{ articles.content }}</p>
+
+    <strong><a href="{{ path('article_list') }}">Retour à la list des articles</a></strong>
 </div>
+    <a href="{{ path('article_list') }}">Retour à la list des articles</a>
 
 {% endblock %}
