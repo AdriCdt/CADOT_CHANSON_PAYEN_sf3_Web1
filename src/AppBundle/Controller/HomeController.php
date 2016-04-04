@@ -22,5 +22,22 @@ class HomeController extends Controller
         return $this->render('AppBundle:Article:index.html.twig', [
             'articles' => $articles,
         ]);
+
+
+    }
+
+    /**
+     * @Route("/article-old")
+     */
+    public function articleAction() {
+        $manager = $this->getDoctrine()->getManager();
+        $articleRepository = $manager->getRepository('AppBundle:Article\Article');
+
+        $articles = $articleRepository->findAll();
+
+        return $this->render('AppBundle:Article:index.html.twig', [
+            'articles' => $articles,
+        ]);
+
     }
 }

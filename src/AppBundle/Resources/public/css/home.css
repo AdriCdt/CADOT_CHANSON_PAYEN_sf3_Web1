@@ -1,4 +1,7 @@
 body {
-    background: #000000;
-    color: #FFF;
+    
+}
+
+.list_article {
+    list-style-type: none;
 }

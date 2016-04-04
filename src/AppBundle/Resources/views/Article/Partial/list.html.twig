@@ -1,8 +1,8 @@
-<ul>
+<ul class="list_article">
     {% for article in articles %}
-        <li>
-            id: {{ article.id }} name: {{ article.title }}
-            <a href="{{ path('article_author', { 'author': article.author }) }}">{{ article.author }}</a>
+        <li style="background-color: #99CDD8;">
+            <h3>Titre de l'article : {{ article.title }} </h3>
+            Tag : <a href="{{ path('article_tag', { 'tag': article.tag }) }}">{{ article.tag }}</a>
         </li>
     {% else %}
         <li>Pas d'article trouvé.</li>

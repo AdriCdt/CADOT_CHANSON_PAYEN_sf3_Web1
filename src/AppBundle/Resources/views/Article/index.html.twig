@@ -1,6 +1,21 @@
 {% extends('::base.html.twig') %}
 
 {% block body %}
-    <h1>Liste d'article</h1>
-    {% include('AppBundle:Article/Partial:list.html.twig') %}
+
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-offset-4 col-md-4 text-center">
+                <h1>Liste d'articles</h1>
+                {% include('AppBundle:Article/Partial:list.html.twig') %}
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4 text-center">
+                <a href="#" class="btn btn-primary"> Créer un nouvel
+                    Article</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -4,14 +4,17 @@ namespace AppBundle\Controller\Article;
 
 use AppBundle\Entity\Article\Tag;
 use AppBundle\Form\Type\Article\ArticleType;
+use AppBundle\Entity\Article\Article;
 use AppBundle\Form\Type\Article\TagType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class ArticleController extends Controller
 {
+
     /**
      * @Route("/list", name="article_list")
      */
@@ -32,11 +35,7 @@ class ArticleController extends Controller
      */
     public function showAction($id, Request $request)
     {
-        $tag = $request->query->get('tag');
-
-        return new Response(
-            'Affiche moi l\'article avec l\'id: '.$id.' avec le tag '.$tag
-        );
+        $article = $this->getDoctrine()->getManager();
     }
 
     /**
@@ -65,6 +64,25 @@ class ArticleController extends Controller
 
         $articles = $articleRepository->findBy([
             'author' => $author,
+        ]);
+
+        return $this->render('AppBundle:Article:index.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
+    /**
+     * @Route("/tag", name="article_tag")
+     */
+    public function tagAction(Request $request)
+    {
+        $tag = $request->query->get('tag');
+
+        $em = $this->getDoctrine()->getManager();
+        $articleRepository = $em->getRepository('AppBundle:Article\Article');
+
+        $articles = $articleRepository->findBy([
+            'tag' => $tag,
         ]);
 
         return $this->render('AppBundle:Article:index.html.twig', [
@@ -105,12 +123,26 @@ class ArticleController extends Controller
 
 
     /**
-     * @Route("/new")
+     * @Route("/new", name="article_new")
      *
      * @param Request $request
+     *
+     * @return Request
      */
-    public function newArticleAction(Request $request)
+    public function createAction(Request $request)
     {
+        $article = new Article();
+
+        $article->setTitle('Mon premier article');
+        $article->setContent('bal bla bla');
+        $article->setCreatedAt( new \DateTime() );
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($article);
+        $em->flush();
+
+        return $this->render('AppBundle:Article:create.html.twig');
+
 
     }
 }

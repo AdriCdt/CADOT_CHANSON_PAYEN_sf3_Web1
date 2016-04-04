@@ -19,54 +19,56 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
      */
-    private $content;
+    protected $content;
 
     /**
      * @var string
      *
      * @ORM\Column(name="author", type="string", length=255, nullable=true)
      */
-    private $author;
+    protected $author;
 
     /**
      * @var string
      *
      * @ORM\Column(name="tag", type="string", length=255, nullable=true)
      */
-    private $tag;
+    protected $tag;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime", nullable=true)
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="updatedAt", type="datetime", nullable=true)
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
     }
+
+
 
     /**
      * Get id
