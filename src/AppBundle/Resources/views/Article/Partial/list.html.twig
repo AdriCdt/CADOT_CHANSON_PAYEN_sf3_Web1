@@ -1,7 +1,8 @@
 <ul class="list_article">
     {% for article in articles %}
         <li style="background-color: #99CDD8;">
-            <h3>Titre de l'article : {{ article.title }} </h3>
+            <h3><a href="{{ path('article_show', {'id': article.id})}}"> Titre de l'article : {{ article.title }}</a> </h3>
+            <p>{{ article.createdAt|date('Y-m-d H-i') }}</p>
             Tag : <a href="{{ path('article_tag', { 'tag': article.tag }) }}">{{ article.tag }}</a>
         </li>
     {% else %}
